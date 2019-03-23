@@ -1,18 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
-	"github.com/itchyny/maketen-go"
+	"github.com/itchyny/maketen-go/cli"
 )
 
 func main() {
-	for _, e := range maketen.Solve(
-		maketen.NewInt(1),
-		maketen.NewInt(2),
-		maketen.NewInt(3),
-		maketen.NewInt(4),
-	) {
-		fmt.Printf("%+v\n", e)
-	}
+	os.Exit(cli.Run())
 }
