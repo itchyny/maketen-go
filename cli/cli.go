@@ -1,12 +1,20 @@
 package cli
 
 import (
+	"flag"
 	"fmt"
 	"io"
+	"runtime"
 	"strconv"
 
 	"github.com/itchyny/maketen-go"
 )
+
+const name = "maketen"
+
+const version = "0.0.0"
+
+var revision = "HEAD"
 
 const (
 	exitCodeOK = iota
@@ -19,6 +27,34 @@ type cli struct {
 }
 
 func (cli *cli) run(args []string) int {
+	fs := flag.NewFlagSet(name, flag.ContinueOnError)
+	fs.SetOutput(cli.errStream)
+	fs.Usage = func() {
+		fs.SetOutput(cli.outStream)
+		fmt.Fprintf(cli.outStream, `%[1]s - create 10
+
+Version: %s (rev: %s/%s)
+
+Synopsis:
+    %% %[1]s 1 2 3 4
+
+Options:
+`, name, version, revision, runtime.Version())
+		fs.PrintDefaults()
+	}
+	var showVersion bool
+	fs.BoolVar(&showVersion, "v", false, "print version")
+	if err := fs.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			return exitCodeOK
+		}
+		return exitCodeErr
+	}
+	if showVersion {
+		fmt.Fprintf(cli.outStream, "%s %s (rev: %s/%s)\n", name, version, revision, runtime.Version())
+		return exitCodeOK
+	}
+	args = fs.Args()
 	var x, y, z, w *maketen.Num
 	var err error
 	if len(args) < 4 {
