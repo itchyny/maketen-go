@@ -44,7 +44,12 @@ func (cli *cli) run(args []string) int {
 		fmt.Fprintf(cli.errStream, "%s\n", err)
 		return exitCodeErr
 	}
-	for _, e := range maketen.Solve(x, y, z, w) {
+	solutions := maketen.Solve(x, y, z, w)
+	if len(solutions) == 0 {
+		fmt.Fprintln(cli.errStream, "no answer")
+		return exitCodeErr
+	}
+	for _, e := range solutions {
 		fmt.Fprintf(cli.outStream, "%+v\n", e)
 	}
 	return exitCodeOK
