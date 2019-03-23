@@ -58,7 +58,7 @@ func (cli *cli) run(args []string) int {
 func parseInt(str string) (*maketen.Num, error) {
 	i, err := strconv.Atoi(str)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to parse %q", str)
 	}
 	return maketen.NewInt(i), nil
 }
