@@ -3,7 +3,7 @@ package maketen
 // Operator ...
 type Operator struct {
 	str   rune
-	Apply func(Num, Num) Num
+	Apply func(*Num, *Num) *Num
 }
 
 // String implements Stringer.
@@ -26,25 +26,25 @@ func (op Operator) isSubOrMul() bool {
 var zero = NewZero()
 
 var operators = []Operator{
-	Operator{'+', func(l, r Num) Num {
+	Operator{'+', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Add(l, r)
 	}},
-	Operator{'-', func(l, r Num) Num {
+	Operator{'-', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Sub(l, r)
 	}},
-	Operator{'*', func(l, r Num) Num {
+	Operator{'*', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Mul(l, r)
 	}},
-	Operator{'/', func(l, r Num) Num {
+	Operator{'/', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}

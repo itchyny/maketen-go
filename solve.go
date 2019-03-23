@@ -1,7 +1,7 @@
 package maketen
 
 // Solve maketen.
-func Solve(x, y, z, w Num) []Expr {
+func Solve(x, y, z, w *Num) []Expr {
 	var exprs []Expr
 	res := make(map[string]struct{})
 	ten := NewInt(10)
@@ -23,7 +23,7 @@ func Solve(x, y, z, w Num) []Expr {
 	return exprs
 }
 
-func trees(x, y, z, w Num, a, b, c Operator) []Expr {
+func trees(x, y, z, w *Num, a, b, c Operator) []Expr {
 	return []Expr{
 		&BinOp{a, &BinOp{b, &BinOp{c, x, y}, z}, w},
 		&BinOp{a, &BinOp{b, x, &BinOp{c, y, z}}, w},

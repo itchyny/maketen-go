@@ -57,11 +57,11 @@ func isBinOp(e Expr) bool {
 }
 
 // Eval expression.
-func Eval(e Expr) Num {
+func Eval(e Expr) *Num {
 	switch e := e.(type) {
 	case *BinOp:
 		return e.op.Apply(Eval(e.lhs), Eval(e.rhs))
-	case Num:
+	case *Num:
 		return e
 	default:
 		panic(e)
