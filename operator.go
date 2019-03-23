@@ -6,6 +6,23 @@ type Operator struct {
 	Apply func(Num, Num) Num
 }
 
+// String implements Stringer.
+func (op Operator) String() string {
+	return string(op.str)
+}
+
+func (op Operator) isAddOrSub() bool {
+	return op.str == '+' || op.str == '-'
+}
+
+func (op Operator) isMulOrDiv() bool {
+	return op.str == '*' || op.str == '/'
+}
+
+func (op Operator) isSubOrMul() bool {
+	return op.str == '-' || op.str == '*'
+}
+
 var zero = NewZero()
 
 var operators = []Operator{
