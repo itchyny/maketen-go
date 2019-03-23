@@ -32,6 +32,10 @@ func (n *Num) Cmp(m *Num) int {
 
 // String implements Stringer.
 func (n *Num) String() string {
+	r := (*big.Rat)(n)
+	if r.Denom().Cmp(big.NewInt(1)) == 0 {
+		return r.Num().String()
+	}
 	return ((*big.Rat)(n)).String()
 }
 
