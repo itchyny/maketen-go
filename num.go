@@ -5,38 +5,42 @@ import "math/big"
 // Num ...
 type Num big.Rat
 
+func (n *Num) rat() *big.Rat {
+	return (*big.Rat)(n)
+}
+
 // Add ...
 func (n *Num) Add(l, r *Num) *Num {
-	return (*Num)(((*big.Rat)(n)).Add((*big.Rat)(l), (*big.Rat)(r)))
+	return (*Num)(n.rat().Add(l.rat(), r.rat()))
 }
 
 // Sub ...
 func (n *Num) Sub(l, r *Num) *Num {
-	return (*Num)(((*big.Rat)(n)).Sub((*big.Rat)(l), (*big.Rat)(r)))
+	return (*Num)(n.rat().Sub(l.rat(), r.rat()))
 }
 
 // Mul ...
 func (n *Num) Mul(l, r *Num) *Num {
-	return (*Num)(((*big.Rat)(n)).Mul((*big.Rat)(l), (*big.Rat)(r)))
+	return (*Num)(n.rat().Mul(l.rat(), r.rat()))
 }
 
 // Quo ...
 func (n *Num) Quo(l, r *Num) *Num {
-	return (*Num)(((*big.Rat)(n)).Quo((*big.Rat)(l), (*big.Rat)(r)))
+	return (*Num)(n.rat().Quo(l.rat(), r.rat()))
 }
 
 // Cmp ...
 func (n *Num) Cmp(m *Num) int {
-	return ((*big.Rat)(n)).Cmp((*big.Rat)(m))
+	return n.rat().Cmp(m.rat())
 }
 
 // String implements Stringer.
 func (n *Num) String() string {
-	r := (*big.Rat)(n)
+	r := n.rat()
 	if r.Denom().Cmp(big.NewInt(1)) == 0 {
 		return r.Num().String()
 	}
-	return ((*big.Rat)(n)).String()
+	return r.String()
 }
 
 // NewExpr  ...
