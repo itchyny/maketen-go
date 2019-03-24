@@ -11,16 +11,13 @@ func (op Operator) String() string {
 	return string(op.str)
 }
 
-func (op Operator) isAddOrSub() bool {
-	return op.str == '+' || op.str == '-'
-}
-
-func (op Operator) isMulOrDiv() bool {
-	return op.str == '*' || op.str == '/'
-}
-
-func (op Operator) isSubOrMul() bool {
-	return op.str == '-' || op.str == '*'
+func (op Operator) isOneOf(cs ...rune) bool {
+	for _, r := range cs {
+		if op.str == r {
+			return true
+		}
+	}
+	return false
 }
 
 var zero = NewZero()

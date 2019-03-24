@@ -15,8 +15,8 @@ type BinOp struct {
 
 // String implements Stringer.
 func (bo *BinOp) String() string {
-	lparen := bo.op.isMulOrDiv() && isAddOrSub(bo.lhs)
-	rparen := bo.op.isSubOrMul() && isAddOrSub(bo.rhs) || bo.op.str == '/' && isBinOp(bo.rhs)
+	lparen := bo.op.isOneOf('*', '/') && isAddOrSub(bo.lhs)
+	rparen := bo.op.isOneOf('-', '*') && isAddOrSub(bo.rhs) || bo.op.isOneOf('/') && isBinOp(bo.rhs)
 	s := new(strings.Builder)
 	if lparen {
 		s.WriteRune('(')
@@ -41,7 +41,7 @@ func (bo *BinOp) String() string {
 func isAddOrSub(e Expr) bool {
 	switch e := e.(type) {
 	case *BinOp:
-		return e.op.isAddOrSub()
+		return e.op.isOneOf('+', '-')
 	default:
 		return false
 	}
