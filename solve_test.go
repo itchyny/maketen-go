@@ -10,18 +10,23 @@ import (
 
 func TestSolve(t *testing.T) {
 	results := new(strings.Builder)
+	var cnt int
 	for x := 0; x < 10; x++ {
 		for y := 0; y < 10; y++ {
 			for z := 0; z < 10; z++ {
 				for w := 0; w < 10; w++ {
 					got := Solve(NewInt(x), NewInt(y), NewInt(z), NewInt(w))
 					for _, e := range got {
+						cnt++
 						results.WriteString(e.String())
 						results.WriteRune('\n')
 					}
 				}
 			}
 		}
+	}
+	if expected := 23741; cnt != expected {
+		t.Fatalf("expected %d solutions but got: %d", expected, cnt)
 	}
 
 	cmd := exec.Command("bc", "-l")
