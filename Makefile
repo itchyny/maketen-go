@@ -26,7 +26,7 @@ show-version:
 
 .PHONY: cross
 cross: crossdeps
-	goxz -n $(BIN) -build-ldflags=$(BUILD_LDFLAGS) ./cmd/$(BIN)
+	goxz -n $(BIN) -pv=v$(VERSION) -build-ldflags=$(BUILD_LDFLAGS) ./cmd/$(BIN)
 
 .PHONY: crossdeps
 crossdeps: deps
