@@ -5,17 +5,3 @@ env: PATH=/home/travis/gopath/bin:$PATH
 script:
   - make test
   - make lint
-
-before_deploy:
-  - make cross
-deploy:
-  provider: releases
-  skip_cleanup: true
-  api_key:
-    secure: Fp6fld4zzNBJ5cnwUDPE5HH+IQ9MAqRWaIAcf4AgwjfMMpSDrvI6FQ9M1LVqLFohZNhCtUX4njEZ/PwIcCaA3rxvp49TjskqwtCsLnrYbtxwmh4AhPo27Pga/Z+7Wf3ZehB86XOQVecIN2mwDysohwh3mNQR5L+GstgivwsXdwSAE/ZZO2TTL1d2kZYVR6MCu4BDC7+1wGIod01/xM46uvMasWbjcR9KGaQHBObeuccT4KxczYxbpc2CJsijkDKbrPiANWXAILH5bu10IJMDjLx9x0SYHKEjLzBaBzbJSwY6yuYD6xMJgXlyii2X6VMRnz7wqLtIbp62DSFlkOyTd552Naj7XFjGOt93AFsQQNwlm7M7TGS28mzlA72tqn3cRyJtR7jyiwu2qiCrYcEsER277CIfrcvyGVochd+TKRVPeEVn2Ed/D8KhqF/kC4sPVLOn4aNrYfCMgP6wMEbHxsWLXjpB6oMO8bT5b51ch5Spxgv91gOlYJmozWzuGyfbgmx4bLRrmnGtQMBMtHnjLAJSb2GTgL/ngd1qMMcGhLGwh64PRF0OomLGG+fnlmjlbZN2Eks18xfZX/xiHwlHLRQmOEUlFIpQQmxSqCLXN6+YVod4hwk1Cy6xKRiVxe0y9b5Wvqe+nT1KRt2vvVHsE5Ec89uUJDufsJwVUF1KX7I=
-  file: goxz/*
-  file_glob: true
-  on:
-    repo: itchyny/maketen-go
-    tags: true
-    all_branches: false
