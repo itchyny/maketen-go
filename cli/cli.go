@@ -31,7 +31,7 @@ func (cli *cli) run(args []string) int {
 	fs.SetOutput(cli.errStream)
 	fs.Usage = func() {
 		fs.SetOutput(cli.outStream)
-		fmt.Fprintf(cli.outStream, `%[1]s - create 10
+		fmt.Fprintf(cli.outStream, `%[1]s - create 10 from four numbers
 
 Version: %s (rev: %s/%s)
 
