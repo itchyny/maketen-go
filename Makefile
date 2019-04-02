@@ -1,4 +1,5 @@
 BIN := maketen
+VERSION = $$(make show-version)
 CURRENT_REVISION := $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS := "-X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
 export GO111MODULE=on
@@ -17,6 +18,11 @@ install: deps
 .PHONY: deps
 deps:
 	go get -d -v ./...
+
+.PHONY: show-version
+show-version:
+	@GO111MODULE=off go get github.com/motemen/gobump/cmd/gobump
+	@gobump show -r cli
 
 .PHONY: cross
 cross: crossdeps
@@ -43,3 +49,24 @@ lintdeps:
 clean:
 	rm -rf build goxz
 	go clean
+
+.PHONY: bump
+bump:
+	@git status --porcelain | grep "^" && echo "git workspace is dirty" >/dev/stderr && exit 1 || :
+	gobump set $(shell sh -c 'read -p "input next version (current: $(VERSION)): " v && echo $$v') -w cli
+	git commit -am "bump up version to $(VERSION)"
+	git tag "v$(VERSION)"
+	git push
+	git push --tags
+
+.PHONY: crossdocker
+crossdocker:
+	docker run --rm -v `pwd`:"/$${PWD##*/}" -w "/$${PWD##*/}" golang make cross
+
+.PHONY: upload
+upload:
+	GO111MODULE=off go get github.com/tcnksm/ghr
+	ghr "v$(VERSION)" goxz
+
+.PHONY: release
+release: test lint clean bump crossdocker upload
