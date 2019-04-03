@@ -1,5 +1,6 @@
 BIN := maketen
 VERSION = $$(make show-version)
+VERSION_PATH := cli
 CURRENT_REVISION := $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS := "-X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
 export GO111MODULE=on
@@ -18,7 +19,7 @@ install:
 .PHONY: show-version
 show-version:
 	@GO111MODULE=off go get github.com/motemen/gobump/cmd/gobump
-	@gobump show -r cli
+	@gobump show -r $(VERSION_PATH)
 
 .PHONY: cross
 cross: crossdeps
@@ -49,7 +50,7 @@ clean:
 .PHONY: bump
 bump:
 	@git status --porcelain | grep "^" && echo "git workspace is dirty" >/dev/stderr && exit 1 || :
-	gobump set $(shell sh -c 'read -p "input next version (current: $(VERSION)): " v && echo $$v') -w cli
+	gobump set $(shell sh -c 'read -p "input next version (current: $(VERSION)): " v && echo $$v') -w $(VERSION_PATH)
 	git commit -am "bump up version to $(VERSION)"
 	git tag "v$(VERSION)"
 	git push
