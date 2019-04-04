@@ -1,5 +1,5 @@
 BIN := maketen
-VERSION = $$(make show-version)
+VERSION := $$(make show-version)
 VERSION_PATH := cli
 CURRENT_REVISION := $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS := "-X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
