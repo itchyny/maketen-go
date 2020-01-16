@@ -1,4 +1,4 @@
-# maketen-go [![Travis Build Status](https://travis-ci.org/itchyny/maketen-go.svg?branch=master)](https://travis-ci.org/itchyny/maketen-go)
+# maketen-go [![CI Status](https://github.com/itchyny/maketen-go/workflows/CI/badge.svg)](https://github.com/itchyny/maketen-go/actions)
 ### Create 10 from four numbers!
 
 ## Usage

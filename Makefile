@@ -2,7 +2,7 @@ BIN := maketen
 VERSION := $$(make -s show-version)
 VERSION_PATH := cli
 CURRENT_REVISION := $(shell git rev-parse --short HEAD)
-BUILD_LDFLAGS := "-X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
+BUILD_LDFLAGS := "-s -w -X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
 GOBIN ?= $(shell go env GOPATH)/bin
 export GO111MODULE=on
 
@@ -62,16 +62,9 @@ endif
 	git push origin master
 	git push origin "refs/tags/v$(VERSION)"
 
-.PHONY: crossdocker
-crossdocker:
-	docker run --rm -v `pwd`:"/$${PWD##*/}" -w "/$${PWD##*/}" golang make cross
-
 .PHONY: upload
 upload: $(GOBIN)/ghr
 	ghr "v$(VERSION)" goxz
 
 $(GOBIN)/ghr:
 	cd && go get github.com/tcnksm/ghr
-
-.PHONY: release
-release: test lint clean bump crossdocker upload
