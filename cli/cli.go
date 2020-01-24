@@ -58,31 +58,31 @@ Options:
 	var x, y, z, w *maketen.Num
 	var err error
 	if len(args) < 4 {
-		fmt.Fprintln(cli.errStream, "too few arguments")
+		fmt.Fprintf(cli.errStream, "%s: too few arguments\n", name)
 		return exitCodeErr
 	} else if len(args) > 4 {
-		fmt.Fprintln(cli.errStream, "too many arguments")
+		fmt.Fprintf(cli.errStream, "%s: too many arguments\n", name)
 		return exitCodeErr
 	}
 	if x, err = parseInt(args[0]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s\n", err)
+		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
 		return exitCodeErr
 	}
 	if y, err = parseInt(args[1]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s\n", err)
+		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
 		return exitCodeErr
 	}
 	if z, err = parseInt(args[2]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s\n", err)
+		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
 		return exitCodeErr
 	}
 	if w, err = parseInt(args[3]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s\n", err)
+		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
 		return exitCodeErr
 	}
 	solutions := maketen.Solve(x, y, z, w)
 	if len(solutions) == 0 {
-		fmt.Fprintln(cli.errStream, "no answer")
+		fmt.Fprintf(cli.errStream, "%s: no answer\n", name)
 		return exitCodeErr
 	}
 	for _, e := range solutions {
