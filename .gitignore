@@ -1,2 +1,5 @@
-/goxz
 /maketen
+/goxz
+*.exe
+*.test
+*.out
