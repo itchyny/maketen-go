@@ -21,7 +21,7 @@ brew install itchyny/tap/maketen
 
 ### Build from source
 ```bash
-go get -u github.com/itchyny/maketen-go/cmd/maketen
+go get github.com/itchyny/maketen-go/cmd/maketen
 ```
 
 ## Bug Tracker
