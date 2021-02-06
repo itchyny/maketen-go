@@ -5,6 +5,7 @@ import "strings"
 // Expr ...
 type Expr interface {
 	String() string
+	isExpr()
 }
 
 // BinOp ...
@@ -12,6 +13,8 @@ type BinOp struct {
 	op       Operator
 	lhs, rhs Expr
 }
+
+func (*BinOp) isExpr() {}
 
 // String implements Stringer.
 func (bo *BinOp) String() string {

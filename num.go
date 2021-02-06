@@ -5,6 +5,8 @@ import "math/big"
 // Num ...
 type Num big.Rat
 
+func (*Num) isExpr() {}
+
 func (n *Num) rat() *big.Rat {
 	return (*big.Rat)(n)
 }
