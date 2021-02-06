@@ -20,7 +20,7 @@ func (op Operator) isOneOf(cs ...rune) bool {
 	return false
 }
 
-var zero = NewZero()
+var zero = NewInt(0)
 
 var operators = []Operator{
 	{'+', func(l, r *Num) *Num {

@@ -52,11 +52,6 @@ func NewExpr() *Num {
 	return (*Num)(new(big.Rat))
 }
 
-// NewZero ...
-func NewZero() *Num {
-	return (*Num)(big.NewRat(0, 1))
-}
-
 // NewInt ...
 func NewInt(i int) *Num {
 	return (*Num)(big.NewRat(int64(i), 1))
