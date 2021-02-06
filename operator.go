@@ -23,25 +23,25 @@ func (op Operator) isOneOf(cs ...rune) bool {
 var zero = NewZero()
 
 var operators = []Operator{
-	Operator{'+', func(l, r *Num) *Num {
+	{'+', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Add(l, r)
 	}},
-	Operator{'-', func(l, r *Num) *Num {
+	{'-', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Sub(l, r)
 	}},
-	Operator{'*', func(l, r *Num) *Num {
+	{'*', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
 		return NewExpr().Mul(l, r)
 	}},
-	Operator{'/', func(l, r *Num) *Num {
+	{'/', func(l, r *Num) *Num {
 		if l == nil || r == nil {
 			return nil
 		}
