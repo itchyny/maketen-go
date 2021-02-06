@@ -17,7 +17,7 @@ type BinOp struct {
 func (bo *BinOp) String() string {
 	lparen := bo.op.isOneOf('*', '/') && isAddOrSub(bo.lhs)
 	rparen := bo.op.isOneOf('-', '*') && isAddOrSub(bo.rhs) || bo.op.isOneOf('/') && isBinOp(bo.rhs)
-	s := new(strings.Builder)
+	var s strings.Builder
 	if lparen {
 		s.WriteRune('(')
 	}
