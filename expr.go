@@ -63,7 +63,7 @@ func isBinOp(e Expr) bool {
 func Eval(e Expr) *Num {
 	switch e := e.(type) {
 	case *BinOp:
-		return e.op.Apply(Eval(e.lhs), Eval(e.rhs))
+		return e.op.apply(Eval(e.lhs), Eval(e.rhs))
 	case *Num:
 		return e
 	default:

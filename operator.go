@@ -3,7 +3,7 @@ package maketen
 // Operator ...
 type Operator struct {
 	str   rune
-	Apply func(*Num, *Num) *Num
+	apply func(*Num, *Num) *Num
 }
 
 // String implements Stringer.
