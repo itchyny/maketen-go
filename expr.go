@@ -29,7 +29,7 @@ func (bo *BinOp) String() string {
 		s.WriteRune(')')
 	}
 	s.WriteRune(' ')
-	s.WriteString(bo.op.String())
+	s.WriteRune(bo.op.str)
 	s.WriteRune(' ')
 	if rparen {
 		s.WriteRune('(')
