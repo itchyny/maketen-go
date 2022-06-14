@@ -1,5 +1,5 @@
 # maketen-go [![CI Status](https://github.com/itchyny/maketen-go/workflows/CI/badge.svg)](https://github.com/itchyny/maketen-go/actions)
-### Create 10 from four numbers!
+### Create 10 from numbers!
 
 ## Usage
 ```

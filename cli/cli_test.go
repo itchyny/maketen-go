@@ -16,8 +16,8 @@ func TestCliRun(t *testing.T) {
 			name: "solve 0",
 			args: []string{"1", "2", "3", "4"},
 			expected: `1 + 2 + 3 + 4
-1 * 2 * 3 + 4
 1 * (2 * 3 + 4)
+1 * 2 * 3 + 4
 `,
 		},
 		{
@@ -39,21 +39,34 @@ func TestCliRun(t *testing.T) {
 `,
 		},
 		{
+			name: "solve 4",
+			args: []string{"2", "5"},
+			expected: `2 * 5
+`,
+		},
+		{
+			name: "solve 5",
+			args: []string{"5", "4", "8"},
+			expected: `5 / 4 * 8
+5 / (4 / 8)
+`,
+		},
+		{
+			name: "solve 6",
+			args: []string{"4", "5", "6", "7", "8"},
+			expected: `(4 * 5 - 6) / 7 + 8
+`,
+		},
+		{
 			name: "no answer",
 			args: []string{"1", "1", "7", "9"},
 			err: `no answer
 `,
 		},
 		{
-			name: "too few arguments",
-			args: []string{"1", "1", "1"},
-			err: `too few arguments
-`,
-		},
-		{
-			name: "too many arguments",
-			args: []string{"1", "1", "1", "1", "1"},
-			err: `too many arguments
+			name: "specify numbers",
+			args: []string{},
+			err: `specify numbers
 `,
 		},
 		{
@@ -82,7 +95,7 @@ func TestCliRun(t *testing.T) {
 				if code != exitCodeErr {
 					t.Errorf("code should be %d but got %d", exitCodeErr, code)
 				}
-				if got := errStream.String(); !strings.Contains(got, tc.expected) {
+				if got := errStream.String(); !strings.Contains(got, tc.err) {
 					t.Errorf("error output should contain %q but got %q", tc.err, got)
 				}
 			}

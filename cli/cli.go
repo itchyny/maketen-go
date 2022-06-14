@@ -31,7 +31,7 @@ func (cli *cli) run(args []string) int {
 	fs.SetOutput(cli.errStream)
 	fs.Usage = func() {
 		fs.SetOutput(cli.outStream)
-		fmt.Fprintf(cli.outStream, `%[1]s - create 10 from four numbers
+		fmt.Fprintf(cli.outStream, `%[1]s - create 10 from numbers
 
 Version: %s (rev: %s/%s)
 
@@ -55,32 +55,21 @@ Options:
 		return exitCodeOK
 	}
 	args = fs.Args()
-	var x, y, z, w *maketen.Num
 	var err error
-	if len(args) < 4 {
-		fmt.Fprintf(cli.errStream, "%s: too few arguments\n", name)
-		return exitCodeErr
-	} else if len(args) > 4 {
-		fmt.Fprintf(cli.errStream, "%s: too many arguments\n", name)
+	if len(args) < 1 {
+		fmt.Fprintf(cli.errStream, "%s: specify numbers\n", name)
 		return exitCodeErr
 	}
-	if x, err = parseInt(args[0]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
-		return exitCodeErr
+	ns := make([]*maketen.Num, len(args))
+	var n *maketen.Num
+	for i, arg := range args {
+		if n, err = parseInt(arg); err != nil {
+			fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
+			return exitCodeErr
+		}
+		ns[i] = n
 	}
-	if y, err = parseInt(args[1]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
-		return exitCodeErr
-	}
-	if z, err = parseInt(args[2]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
-		return exitCodeErr
-	}
-	if w, err = parseInt(args[3]); err != nil {
-		fmt.Fprintf(cli.errStream, "%s: %s\n", name, err)
-		return exitCodeErr
-	}
-	solutions := maketen.Solve(x, y, z, w)
+	solutions := maketen.Solve(ns...)
 	if len(solutions) == 0 {
 		fmt.Fprintf(cli.errStream, "%s: no answer\n", name)
 		return exitCodeErr
