@@ -2,18 +2,18 @@ package maketen
 
 // Operator ...
 type Operator struct {
-	str   rune
-	apply func(*Num, *Num) *Num
+	symbol byte
+	apply  func(*Num, *Num) *Num
 }
 
 // String implements Stringer.
 func (op Operator) String() string {
-	return string(op.str)
+	return string(op.symbol)
 }
 
-func (op Operator) isOneOf(cs ...rune) bool {
-	for _, r := range cs {
-		if op.str == r {
+func (op Operator) isOneOf(bs ...byte) bool {
+	for _, b := range bs {
+		if op.symbol == b {
 			return true
 		}
 	}

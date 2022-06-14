@@ -22,21 +22,21 @@ func (bo *BinOp) String() string {
 	rparen := bo.op.isOneOf('-', '*') && isAddOrSub(bo.rhs) || bo.op.isOneOf('/') && isBinOp(bo.rhs)
 	var s strings.Builder
 	if lparen {
-		s.WriteRune('(')
+		s.WriteByte('(')
 	}
 	s.WriteString(bo.lhs.String())
 	if lparen {
-		s.WriteRune(')')
+		s.WriteByte(')')
 	}
-	s.WriteRune(' ')
-	s.WriteRune(bo.op.str)
-	s.WriteRune(' ')
+	s.WriteByte(' ')
+	s.WriteByte(bo.op.symbol)
+	s.WriteByte(' ')
 	if rparen {
-		s.WriteRune('(')
+		s.WriteByte('(')
 	}
 	s.WriteString(bo.rhs.String())
 	if rparen {
-		s.WriteRune(')')
+		s.WriteByte(')')
 	}
 	return s.String()
 }

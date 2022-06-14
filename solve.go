@@ -52,7 +52,7 @@ func (ops opsIter) next() ([]Operator, bool) {
 }
 
 func nextOp(op Operator) (Operator, bool) {
-	switch op.str {
+	switch op.symbol {
 	case '\x00':
 		return operators[0], true
 	case '+':
