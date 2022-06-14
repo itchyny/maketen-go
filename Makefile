@@ -4,7 +4,6 @@ VERSION_PATH := cli
 CURRENT_REVISION := $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS := "-s -w -X github.com/itchyny/maketen-go/cli.revision=$(CURRENT_REVISION)"
 GOBIN ?= $(shell go env GOPATH)/bin
-export GO111MODULE=on
 
 .PHONY: all
 all: build
@@ -31,21 +30,28 @@ cross: $(GOBIN)/goxz
 $(GOBIN)/goxz:
 	go install github.com/Songmu/goxz/cmd/goxz@latest
 
+CREDITS: $(GOBIN)/gocredits
+	go mod tidy
+	gocredits -w .
+
+$(GOBIN)/gocredits:
+	go install github.com/Songmu/gocredits/cmd/gocredits@latest
+
 .PHONY: test
 test: build
-	go test -v ./...
+	go test -v -race ./...
 
 .PHONY: lint
-lint: $(GOBIN)/golint
+lint: $(GOBIN)/staticcheck
 	go vet ./...
-	golint -set_exit_status ./...
+	staticcheck -checks all,-ST1000 ./...
 
-$(GOBIN)/golint:
-	go install golang.org/x/lint/golint@latest
+$(GOBIN)/staticcheck:
+	go install honnef.co/go/tools/cmd/staticcheck@latest
 
 .PHONY: clean
 clean:
-	rm -rf $(BIN) goxz
+	rm -rf $(BIN) goxz CREDITS
 	go clean
 
 .PHONY: bump
