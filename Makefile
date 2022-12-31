@@ -1,6 +1,6 @@
 BIN := maketen
 VERSION := $$(make -s show-version)
-VERSION_PATH := cli
+VERSION_PATH := cmd/$(BIN)
 CURRENT_REVISION = $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS = "-s -w -X main.revision=$(CURRENT_REVISION)"
 GOBIN ?= $(shell go env GOPATH)/bin
