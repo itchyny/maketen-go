@@ -24,13 +24,13 @@ $(GOBIN)/gobump:
 	@go install github.com/x-motemen/gobump/cmd/gobump@latest
 
 .PHONY: cross
-cross: $(GOBIN)/goxz
+cross: $(GOBIN)/goxz CREDITS
 	goxz -n $(BIN) -pv=v$(VERSION) -build-ldflags=$(BUILD_LDFLAGS) ./cmd/$(BIN)
 
 $(GOBIN)/goxz:
 	go install github.com/Songmu/goxz/cmd/goxz@latest
 
-CREDITS: $(GOBIN)/gocredits
+CREDITS: $(GOBIN)/gocredits go.sum
 	go mod tidy
 	gocredits -w .
 
