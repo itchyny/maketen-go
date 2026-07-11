@@ -1,4 +1,6 @@
-# maketen-go [![CI Status](https://github.com/itchyny/maketen-go/workflows/CI/badge.svg)](https://github.com/itchyny/maketen-go/actions)
+# maketen-go
+[![CI Status](https://github.com/itchyny/maketen-go/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/itchyny/maketen-go/actions/workflows/ci.yaml?query=branch:main)
+
 ### Create 10 from numbers!
 
 ## Usage
@@ -28,7 +30,7 @@ go install github.com/itchyny/maketen-go/cmd/maketen@latest
 Report bug at [Issues・itchyny/maketen-go - GitHub](https://github.com/itchyny/maketen-go/issues).
 
 ## Author
-itchyny (https://github.com/itchyny)
+itchyny (<https://github.com/itchyny>)
 
 ## License
 This software is released under the MIT License, see LICENSE.
