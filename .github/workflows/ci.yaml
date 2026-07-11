@@ -50,6 +50,12 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: stable
+      - name: Install bc
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          /c/msys64/usr/bin/pacman -S --noconfirm bc
+          echo "C:/msys64/usr/bin" >> "$GITHUB_PATH"
       - name: Test
         run: make test
       - name: Lint
