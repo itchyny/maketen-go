@@ -18,7 +18,7 @@ func TestSolve0(t *testing.T) {
 func TestSolve1(t *testing.T) {
 	var results []string
 	var count int
-	for x := 0; x <= 10; x++ {
+	for x := range 20 {
 		got := Solve(NewInt(x))
 		for _, e := range got {
 			count++
@@ -34,8 +34,8 @@ func TestSolve1(t *testing.T) {
 func TestSolve2(t *testing.T) {
 	var results []string
 	var count int
-	for x := 0; x < 10; x++ {
-		for y := 0; y < 10; y++ {
+	for x := range 10 {
+		for y := range 10 {
 			got := Solve(NewInt(x), NewInt(y))
 			for _, e := range got {
 				count++
@@ -52,9 +52,9 @@ func TestSolve2(t *testing.T) {
 func TestSolve3(t *testing.T) {
 	var results []string
 	var count int
-	for x := 0; x < 10; x++ {
-		for y := 0; y < 10; y++ {
-			for z := 0; z < 10; z++ {
+	for x := range 10 {
+		for y := range 10 {
+			for z := range 10 {
 				got := Solve(NewInt(x), NewInt(y), NewInt(z))
 				for _, e := range got {
 					count++
@@ -72,10 +72,10 @@ func TestSolve3(t *testing.T) {
 func TestSolve4(t *testing.T) {
 	var results []string
 	var count int
-	for x := 0; x < 10; x++ {
-		for y := 0; y < 10; y++ {
-			for z := 0; z < 10; z++ {
-				for w := 0; w < 10; w++ {
+	for x := range 10 {
+		for y := range 10 {
+			for z := range 10 {
+				for w := range 10 {
 					got := Solve(NewInt(x), NewInt(y), NewInt(z), NewInt(w))
 					for _, e := range got {
 						count++

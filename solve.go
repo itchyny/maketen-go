@@ -33,7 +33,7 @@ func Solve(ns ...*Num) []Expr {
 
 func newOpsIter(n int) opsIter {
 	ops := make([]Operator, n)
-	for i := 0; i < n-1; i++ {
+	for i := range n - 1 {
 		ops[i] = operators[0]
 	}
 	return opsIter(ops)
