@@ -2,13 +2,13 @@ package maketen
 
 import "strings"
 
-// Expr ...
+// Expr is an arithmetic expression, either a Num or a BinOp.
 type Expr interface {
 	String() string
 	isExpr()
 }
 
-// BinOp ...
+// BinOp is a binary operation applying an Operator to two sub-expressions.
 type BinOp struct {
 	op       Operator
 	lhs, rhs Expr
@@ -42,28 +42,24 @@ func (bo *BinOp) String() string {
 }
 
 func isAddOrSub(e Expr) bool {
-	switch e := e.(type) {
-	case *BinOp:
-		return e.op.isOneOf('+', '-')
-	default:
-		return false
-	}
+	bo, ok := e.(*BinOp)
+	return ok && bo.op.isOneOf('+', '-')
 }
 
 func isBinOp(e Expr) bool {
-	switch e.(type) {
-	case *BinOp:
-		return true
-	default:
-		return false
-	}
+	_, ok := e.(*BinOp)
+	return ok
 }
 
-// Eval expression.
+// Eval an expression.
 func Eval(e Expr) *Num {
 	switch e := e.(type) {
 	case *BinOp:
-		return e.op.apply(Eval(e.lhs), Eval(e.rhs))
+		l, r := Eval(e.lhs), Eval(e.rhs)
+		if l == nil || r == nil {
+			return nil
+		}
+		return e.op.apply(l, r)
 	case *Num:
 		return e
 	default:

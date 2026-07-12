@@ -2,7 +2,7 @@ package maketen
 
 import "math/big"
 
-// Num ...
+// Num is a number represented as an exact rational.
 type Num big.Rat
 
 func (*Num) isExpr() {}
@@ -11,27 +11,27 @@ func (n *Num) rat() *big.Rat {
 	return (*big.Rat)(n)
 }
 
-// Add ...
+// Add sets n to the sum l+r and returns n.
 func (n *Num) Add(l, r *Num) *Num {
 	return (*Num)(n.rat().Add(l.rat(), r.rat()))
 }
 
-// Sub ...
+// Sub sets n to the difference l-r and returns n.
 func (n *Num) Sub(l, r *Num) *Num {
 	return (*Num)(n.rat().Sub(l.rat(), r.rat()))
 }
 
-// Mul ...
+// Mul sets n to the product l*r and returns n.
 func (n *Num) Mul(l, r *Num) *Num {
 	return (*Num)(n.rat().Mul(l.rat(), r.rat()))
 }
 
-// Quo ...
+// Quo sets n to the quotient l/r and returns n. It panics if r is zero.
 func (n *Num) Quo(l, r *Num) *Num {
 	return (*Num)(n.rat().Quo(l.rat(), r.rat()))
 }
 
-// Cmp ...
+// Cmp compares n and m, returning -1 if n < m, 0 if n == m, and +1 if n > m.
 func (n *Num) Cmp(m *Num) int {
 	return n.rat().Cmp(m.rat())
 }
@@ -47,12 +47,12 @@ func (n *Num) String() string {
 	return r.String()
 }
 
-// NewExpr  ...
-func NewExpr() *Num {
+// NewNum returns a new zero-valued Num.
+func NewNum() *Num {
 	return (*Num)(new(big.Rat))
 }
 
-// NewInt ...
+// NewInt returns a new Num with the integer value i.
 func NewInt(i int) *Num {
 	return (*Num)(big.NewRat(int64(i), 1))
 }

@@ -1,6 +1,6 @@
 package maketen
 
-// Operator ...
+// Operator is a binary arithmetic operator, identified by its symbol.
 type Operator struct {
 	symbol byte
 	apply  func(*Num, *Num) *Num
@@ -24,30 +24,18 @@ var zero = NewInt(0)
 
 var operators = []Operator{
 	{'+', func(l, r *Num) *Num {
-		if l == nil || r == nil {
-			return nil
-		}
-		return NewExpr().Add(l, r)
+		return NewNum().Add(l, r)
 	}},
 	{'-', func(l, r *Num) *Num {
-		if l == nil || r == nil {
-			return nil
-		}
-		return NewExpr().Sub(l, r)
+		return NewNum().Sub(l, r)
 	}},
 	{'*', func(l, r *Num) *Num {
-		if l == nil || r == nil {
-			return nil
-		}
-		return NewExpr().Mul(l, r)
+		return NewNum().Mul(l, r)
 	}},
 	{'/', func(l, r *Num) *Num {
-		if l == nil || r == nil {
-			return nil
-		}
 		if r.Cmp(zero) == 0 {
 			return nil
 		}
-		return NewExpr().Quo(l, r)
+		return NewNum().Quo(l, r)
 	}},
 }
