@@ -9,9 +9,12 @@ import (
 )
 
 func TestSolve0(t *testing.T) {
-	got := Solve()
-	if expected := 0; len(got) != expected {
-		t.Fatalf("expected %d solutions but got: %d", expected, len(got))
+	var count int
+	for range Solve() {
+		count++
+	}
+	if expected := 0; count != expected {
+		t.Fatalf("expected %d solutions but got: %d", expected, count)
 	}
 }
 
@@ -19,8 +22,7 @@ func TestSolve1(t *testing.T) {
 	var results []string
 	var count int
 	for x := range 20 {
-		got := Solve(NewInt(x))
-		for _, e := range got {
+		for e := range Solve(NewInt(x)) {
 			count++
 			results = append(results, e.String())
 		}
@@ -36,8 +38,7 @@ func TestSolve2(t *testing.T) {
 	var count int
 	for x := range 10 {
 		for y := range 10 {
-			got := Solve(NewInt(x), NewInt(y))
-			for _, e := range got {
+			for e := range Solve(NewInt(x), NewInt(y)) {
 				count++
 				results = append(results, e.String())
 			}
@@ -55,8 +56,7 @@ func TestSolve3(t *testing.T) {
 	for x := range 10 {
 		for y := range 10 {
 			for z := range 10 {
-				got := Solve(NewInt(x), NewInt(y), NewInt(z))
-				for _, e := range got {
+				for e := range Solve(NewInt(x), NewInt(y), NewInt(z)) {
 					count++
 					results = append(results, e.String())
 				}
@@ -76,8 +76,7 @@ func TestSolve4(t *testing.T) {
 		for y := range 10 {
 			for z := range 10 {
 				for w := range 10 {
-					got := Solve(NewInt(x), NewInt(y), NewInt(z), NewInt(w))
-					for _, e := range got {
+					for e := range Solve(NewInt(x), NewInt(y), NewInt(z), NewInt(w)) {
 						count++
 						results = append(results, e.String())
 					}

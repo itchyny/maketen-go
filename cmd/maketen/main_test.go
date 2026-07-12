@@ -47,8 +47,8 @@ func TestCliRun(t *testing.T) {
 		{
 			name: "solve 5",
 			args: []string{"5", "4", "8"},
-			expected: `5 / 4 * 8
-5 / (4 / 8)
+			expected: `5 / (4 / 8)
+5 / 4 * 8
 `,
 		},
 		{

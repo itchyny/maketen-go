@@ -77,13 +77,14 @@ Options:
 		}
 		ns[i] = n
 	}
-	solutions := maketen.Solve(ns...)
-	if len(solutions) == 0 {
+	var found bool
+	for e := range maketen.Solve(ns...) {
+		found = true
+		fmt.Fprintf(cli.outStream, "%+v\n", e)
+	}
+	if !found {
 		fmt.Fprintf(cli.errStream, "%s: no answer\n", name)
 		return exitCodeErr
-	}
-	for _, e := range solutions {
-		fmt.Fprintf(cli.outStream, "%+v\n", e)
 	}
 	return exitCodeOK
 }
