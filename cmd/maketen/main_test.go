@@ -15,8 +15,8 @@ func TestCliRun(t *testing.T) {
 		{
 			name: "solve 0",
 			args: []string{"1", "2", "3", "4"},
-			expected: `1 + 2 + 3 + 4
-1 * (2 * 3 + 4)
+			expected: `1 * (2 * 3 + 4)
+1 + 2 + 3 + 4
 1 * 2 * 3 + 4
 `,
 		},

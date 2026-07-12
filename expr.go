@@ -18,8 +18,9 @@ func (*BinOp) isExpr() {}
 
 // String implements Stringer.
 func (bo *BinOp) String() string {
-	lparen := bo.op.isOneOf('*', '/') && isAddOrSub(bo.lhs)
-	rparen := bo.op.isOneOf('-', '*') && isAddOrSub(bo.rhs) || bo.op.isOneOf('/') && isBinOp(bo.rhs)
+	lparen := prec(bo.lhs) < prec(bo)
+	rparen := prec(bo.rhs) < prec(bo) ||
+		prec(bo.rhs) == prec(bo) && bo.op.isOneOf('-', '/')
 	var s strings.Builder
 	if lparen {
 		s.WriteByte('(')
@@ -41,14 +42,12 @@ func (bo *BinOp) String() string {
 	return s.String()
 }
 
-func isAddOrSub(e Expr) bool {
-	bo, ok := e.(*BinOp)
-	return ok && bo.op.isOneOf('+', '-')
-}
-
-func isBinOp(e Expr) bool {
-	_, ok := e.(*BinOp)
-	return ok
+// prec reports the precedence of e's root operator, or 3 for an atom.
+func prec(e Expr) int {
+	if bo, ok := e.(*BinOp); ok {
+		return bo.op.prec()
+	}
+	return 3
 }
 
 // Eval an expression.

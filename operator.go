@@ -20,6 +20,14 @@ func (op Operator) isOneOf(bs ...byte) bool {
 	return false
 }
 
+// prec reports the precedence of op: 2 for '*' and '/', 1 for '+' and '-'.
+func (op Operator) prec() int {
+	if op.isOneOf('*', '/') {
+		return 2
+	}
+	return 1
+}
+
 var zero = NewInt(0)
 
 var operators = []Operator{
