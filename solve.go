@@ -2,7 +2,7 @@ package maketen
 
 import "iter"
 
-var ten = NewInt(10)
+var ten = NewNum(10)
 
 // Solve maketen.
 func Solve(ns ...*Num) iter.Seq[Expr] {

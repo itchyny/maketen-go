@@ -5,6 +5,11 @@ import "math/big"
 // Num is a number represented as an exact rational.
 type Num big.Rat
 
+// NewNum returns a new Num with the integer value i.
+func NewNum(i int) *Num {
+	return (*Num)(big.NewRat(int64(i), 1))
+}
+
 func (*Num) isExpr() {}
 
 func (n *Num) rat() *big.Rat {
@@ -45,14 +50,4 @@ func (n *Num) String() string {
 		return r.Num().String()
 	}
 	return r.String()
-}
-
-// NewNum returns a new zero-valued Num.
-func NewNum() *Num {
-	return (*Num)(new(big.Rat))
-}
-
-// NewInt returns a new Num with the integer value i.
-func NewInt(i int) *Num {
-	return (*Num)(big.NewRat(int64(i), 1))
 }

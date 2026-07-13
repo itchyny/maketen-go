@@ -28,22 +28,22 @@ func (op Operator) prec() int {
 	return 1
 }
 
-var zero = NewInt(0)
+var zero = NewNum(0)
 
 var operators = []Operator{
 	{'+', func(l, r *Num) *Num {
-		return NewNum().Add(l, r)
+		return NewNum(0).Add(l, r)
 	}},
 	{'-', func(l, r *Num) *Num {
-		return NewNum().Sub(l, r)
+		return NewNum(0).Sub(l, r)
 	}},
 	{'*', func(l, r *Num) *Num {
-		return NewNum().Mul(l, r)
+		return NewNum(0).Mul(l, r)
 	}},
 	{'/', func(l, r *Num) *Num {
 		if r.Cmp(zero) == 0 {
 			return nil
 		}
-		return NewNum().Quo(l, r)
+		return NewNum(0).Quo(l, r)
 	}},
 }

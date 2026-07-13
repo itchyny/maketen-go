@@ -22,7 +22,7 @@ func TestSolve1(t *testing.T) {
 	var results []string
 	var count int
 	for x := range 20 {
-		for e := range Solve(NewInt(x)) {
+		for e := range Solve(NewNum(x)) {
 			count++
 			results = append(results, e.String())
 		}
@@ -38,7 +38,7 @@ func TestSolve2(t *testing.T) {
 	var count int
 	for x := range 10 {
 		for y := range 10 {
-			for e := range Solve(NewInt(x), NewInt(y)) {
+			for e := range Solve(NewNum(x), NewNum(y)) {
 				count++
 				results = append(results, e.String())
 			}
@@ -56,7 +56,7 @@ func TestSolve3(t *testing.T) {
 	for x := range 10 {
 		for y := range 10 {
 			for z := range 10 {
-				for e := range Solve(NewInt(x), NewInt(y), NewInt(z)) {
+				for e := range Solve(NewNum(x), NewNum(y), NewNum(z)) {
 					count++
 					results = append(results, e.String())
 				}
@@ -76,7 +76,7 @@ func TestSolve4(t *testing.T) {
 		for y := range 10 {
 			for z := range 10 {
 				for w := range 10 {
-					for e := range Solve(NewInt(x), NewInt(y), NewInt(z), NewInt(w)) {
+					for e := range Solve(NewNum(x), NewNum(y), NewNum(z), NewNum(w)) {
 						count++
 						results = append(results, e.String())
 					}

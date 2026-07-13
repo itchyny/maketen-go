@@ -94,5 +94,5 @@ func parseInt(str string) (*maketen.Num, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse %q", str)
 	}
-	return maketen.NewInt(i), nil
+	return maketen.NewNum(i), nil
 }
