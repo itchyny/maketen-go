@@ -8,7 +8,7 @@ var ten = NewNum(10)
 func Solve(ns ...*Num) iter.Seq[Expr] {
 	return func(yield func(Expr) bool) {
 		for e, v := range exprSeq(ns) {
-			if v.Cmp(ten) == 0 && !yield(e) {
+			if v.cmp(ten) == 0 && !yield(e) {
 				return
 			}
 		}
@@ -29,7 +29,7 @@ func exprSeq(ns []*Num) iter.Seq2[Expr, *Num] {
 						// Skip re-associable duplicates: for the associative
 						// operators, a same-precedence right operand builds a
 						// tree that renders identically to a left-leaning one.
-						if op.isOneOf('+', '*') && prec(r) == op.prec() {
+						if op.isOneOf('+', '*') && r.prec() == op.prec() {
 							continue
 						}
 						// Skip invalid subexpressions (division by zero); no
