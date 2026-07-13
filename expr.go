@@ -49,19 +49,3 @@ func prec(e Expr) int {
 	}
 	return 3
 }
-
-// Eval an expression.
-func Eval(e Expr) *Num {
-	switch e := e.(type) {
-	case *BinOp:
-		l, r := Eval(e.lhs), Eval(e.rhs)
-		if l == nil || r == nil {
-			return nil
-		}
-		return e.op.apply(l, r)
-	case *Num:
-		return e
-	default:
-		panic(e)
-	}
-}
