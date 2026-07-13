@@ -90,6 +90,17 @@ func TestSolve4(t *testing.T) {
 	testResults(t, results)
 }
 
+func TestSolveBreak(t *testing.T) {
+	var count int
+	for range Solve(NewNum(1), NewNum(2), NewNum(3), NewNum(4)) {
+		count++
+		break
+	}
+	if expected := 1; count != expected {
+		t.Fatalf("expected to stop after %d solution but got: %d", expected, count)
+	}
+}
+
 func testResults(t *testing.T, results []string) {
 	cmd := exec.Command("bc", "-l")
 	cmd.Stdin = strings.NewReader(strings.Join(results, "\n"))
